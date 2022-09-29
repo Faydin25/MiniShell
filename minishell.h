@@ -17,8 +17,9 @@
 typedef struct s_data
 {
 	char		*temp;
-	char		**arg;
-	char		**env_in;
+	char		**arg;//bütün argümanları burada almam lazım!
+	char		**env_in;//bütün envleri burada almam lazım!
+	char		**export;
 	char		*cwd;
 }			t_data;
 
@@ -32,12 +33,13 @@ t_reach	*g_reach;
 void	ft_echo(char **arg);
 void	ft_commands(void);
 void	ft_cd(char **arg);
-void	ft_routine(int ac, char **av, char **env);
+void	ft_routine(void);
 void    ft_env(char **env_in);
 void	ft_just_export(char **env);
 char	**ft_export(char **env, char **arg);
 void	ft_copy_env(char **env);
 void	ft_malloc_for_env(char **env);
 void	ft_unset(char **env, char **arg);
+void ft_malloc_for_export(char **env);
+void    ft_copy_export(char **env);
 #endif
-//buraya kendi struct yapılarınızı yazın.hangi struct ne için yorum satırı olarak belirtin mucx.
