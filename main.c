@@ -39,42 +39,15 @@ void	ft_commands(void)
 
 int	main(int ac, char **av, char **env)
 {
-	pid_t	pid;
-
-	(void)ac;
-	(void)av;
-	g_reach = malloc(sizeof(t_data));
-	g_reach->data = malloc(sizeof(t_data));
-	ft_copy_env(env);
-	ft_copy_export(env);// env'leri kopya olarak kullanıyoruz!
-	while (1)
-	{
-
-		g_reach->data->temp = readline("$Bismillah\033[0;32mterm\033[0m > ");
-
-		g_reach->data->arg = ft_split(g_reach->data->temp, ' ');
-		add_history(g_reach->data->temp);
-		if (!g_reach->data->arg)
-			continue ;
-		if (ft_control_builtin())
-			ft_commands();//eger builtinse ve pipe yoksa -> commandsi calistirip continue
-		else
-		{
-			pid = fork();
-			if (pid > 0)
-				wait(NULL);
-			if (pid == 0)//exit ve cd
-			{
-				ft_commands();
-				exit(0);//?
-			}
-			if (ft_strncmp(g_reach->data->arg[0], "exit", 4) == 0)
-			{
-				//system("leaks minishell");
-				printf("exit\n");
-				exit(0);
-			}
-		}
-		//free(g_reach->data->temp);
-	}
+  g_reach->data = malloc(sizeof(t_data));
+  ft_copy_env(env);
+  while (1)
+  {
+    g_reach->data->temp = readline("$Bismillah\033[0;32mterm\033[0m > ");
+    add_history(g_reach->data->temp);
+    ft_parser(ac, av);//Tarık
+    ft_routine(ac, av, env);//Zehra
+  }
+  //sysyem("leaks minishell");
+  return (0);
 }
