@@ -37,5 +37,4 @@ void	ft_cd(char **arg)
 		if (chdir(arg[1]))
 				perror(arg[1]);
 	}
-	free(s);
 }

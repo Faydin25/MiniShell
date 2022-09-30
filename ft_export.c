@@ -32,6 +32,25 @@ char    **ft_add_malloc_for_env(char **env)
     return (new);
 }
 
+void    ft_go_env(char *export)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (export[i] && export[i] != '=')
+        i++;
+    while (g_reach->data->env_in[j] &&ft_strncmp(g_reach->data->env_in[j], export, i - 1) != 0)
+        j++;
+    i = 0;
+    while (export[i])
+        i++;
+    free(g_reach->data->env_in[j]);
+    g_reach->data->env_in[j] = (char *)malloc(sizeof(i + 1));
+    ft_memcpy(g_reach->data->env_in[j], export, i);
+}
+
 int ft_check_export2(char *arg)
 {
     int i;
@@ -43,17 +62,18 @@ int ft_check_export2(char *arg)
         j++;
     while (g_reach->data->export[i])
     {
-        //printf("x\n");
         if ((ft_strncmp(g_reach->data->export[i], arg, j - 1)) != 0)
             i++;
         else
         {
             if (arg[j] == '=')
             {
+                j = 0;
                 while (arg[j])
                     j++;
-                g_reach->data->export[i] = (char *)malloc(sizeof (j + 1));
+                g_reach->data->export[i] = (char *)malloc(sizeof (j));
                 ft_memcpy(g_reach->data->export[i], arg, j);
+                ft_go_env(g_reach->data->export[i]);
                 return (1);
             }
         }
@@ -64,10 +84,27 @@ int ft_check_export2(char *arg)
 int ft_check_export(char *arg)
 {
     int i;
+    int j;
 
     i = 0;
+    j = 0;
     if (!((arg[i] >= 'a' && arg[i] <= 'z') || (arg[i] >= 'A' && arg[i] <= 'Z')))
         return (1);
+    while (arg[j])
+    {
+        if (arg[j] == '=')
+            return (0);
+        j++;
+    }
+    while (g_reach->data->export[i])
+    {
+        if (ft_strncmp(g_reach->data->export[i], arg, j - 1) != 0)
+            i++;
+        else
+        {
+            return (2);
+        }
+    }
     return (0);
 }
 
@@ -86,13 +123,13 @@ char    **ft_export(char **env, char **arg)
         {
             if (ft_check_export(arg[k]))
             {
-                printf("export: '%s': not a valid identifier\n", arg[k]);
+                i = ft_check_export(arg[k]);
+                if (i != 2)
+                    printf("export: '%s': not a valid identifier\n", arg[k]);
                 continue ;
             }
             if (ft_check_export2(arg[k]))
-            {
                 continue ;
-            }
             i = 0;
             j = 0;
             while (env[i])
@@ -103,10 +140,7 @@ char    **ft_export(char **env, char **arg)
             env[i] = (char *)malloc(sizeof(char) * (j + 1));
             ft_strncpy(env[i], arg[k], j);
         }
-        //ft_new_env(g_reach->data->export);
+        ft_for_env(env[i]);
     }
-    
     return (env);
 }
-
-//exportdaki argları env için kontrol et!Unset değişicek
