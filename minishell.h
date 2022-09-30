@@ -23,10 +23,19 @@ typedef struct s_data
 	char		*cwd;
 }			t_data;
 
+typedef struct s_data
+{
+    char    **commands;
+    char    **redirections;
+    char    **builtins;
+} parse_data;
+
 typedef	struct s_reach
 {
-	t_data *data;
-}	t_reach;
+	t_data		*data;
+	parse_data	*parse_data;
+}				t_reach;
+
 
 t_reach	*g_reach;
 
@@ -42,4 +51,15 @@ void	ft_malloc_for_env(char **env);
 void	ft_unset(char **env, char **arg);
 void ft_malloc_for_export(char **env);
 void    ft_copy_export(char **env);
+
+int         check_item_around(char *first_command, int pipe_index, int tirnak);
+int         *get_item_index(char *first_command, char c);
+char        **ft_split_bypipe(char *cmd);
+int         get_int_po_count(int *pipe_indexs);
+int         check_null_cmd(char *str, int i);
+int         get_matris_count(char **str);
+char        **get_builtins(void);
+parse_data  *fill_data(char **commands);
+char        **get_cmd_redirections(char **commands);
+char        *find_red(char *pipeline);
 #endif
