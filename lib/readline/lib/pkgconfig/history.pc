@@ -1,4 +1,4 @@
-prefix=/Users/faydin/Desktop/test/lib/readline
+prefix=/Users/faydin/Desktop/Minishelll/lib/readline
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

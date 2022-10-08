@@ -23,7 +23,7 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, ft_signalhandler);
-	g_reach = malloc(sizeof(t_data));
+	g_reach = malloc(sizeof(t_reach));
 	g_reach->data = malloc(sizeof(t_data));
 	ft_copy_env(env);
 	ft_copy_export(env);
