@@ -19,6 +19,8 @@ void	control_D(void)
 
 int	main(int ac, char **av, char **env)
 {
+	(void)ac;
+	(void)av;
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, ft_signalhandler);
 	g_reach = malloc(sizeof(t_data));

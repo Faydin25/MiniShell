@@ -1,4 +1,4 @@
-SRC = main.c ft_echo.c ft_cd.c ft_env.c ft_export.c ft_copy_env.c ft_unset.c ft_for_env.c
+SRC = main.c ft_echo.c ft_cd.c ft_env.c ft_export.c ft_copy_env.c ft_unset.c ft_for_env.c ft_process.c
 LIB	= ./lib/.minishell
 NAME = minishell
 
