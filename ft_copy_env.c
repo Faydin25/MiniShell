@@ -9,13 +9,15 @@ void ft_malloc_for_env(char **env)
     while (env[j])
         j++;
     g_reach->data->env_in = (char **)malloc(sizeof(char *) * (j + 1));
+    g_reach->data->env_in[j] = 0;
     j = 0;
     while(env[j])
     {
         i = 0;
         while (env[j][i])
             i++;
-        g_reach->data->env_in[j] = (char *)malloc(sizeof(char) * (i + 1));
+        g_reach->data->env_in[j] = (char *)malloc(sizeof(char) * (i));
+        g_reach->data->env_in[j][i] = '\0';
         i = 0;
         j++;
     }
@@ -50,6 +52,7 @@ void ft_malloc_for_export(char **env)
     while (env[j])
         j++;
     g_reach->data->export = (char **)malloc(sizeof(char *) * (j + 1));
+    g_reach->data->export[j] = 0;
     j = 0;
     while(env[j])
     {
@@ -57,6 +60,7 @@ void ft_malloc_for_export(char **env)
         while (env[j][i])
             i++;
         g_reach->data->export[j] = (char *)malloc(sizeof(char) * (i + 1));
+        g_reach->data->export[j][i] = '\0';
         i = 0;
         j++;
     }

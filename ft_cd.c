@@ -13,6 +13,13 @@ void	ft_cd(char **arg)
 
 	s = 0;
 	i = 0;
+	while (arg[i])
+		i++;
+	if (i > 2)
+	{
+		printf("To many args!\n");
+		return ;
+	}
 	if (!arg[1] || ft_strchr(arg[1], '~'))
 	{
 		while (g_reach->data->env_in[++i])

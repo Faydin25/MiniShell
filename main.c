@@ -1,54 +1,40 @@
 #include "minishell.h"
+#include <readline/readline.h>
+#include "../../readline/include/readline/readline.h"
 
-int	ft_control_builtin(void)
+void	ft_signalhandler(int sig)
 {
-	if (ft_strncmp(g_reach->data->arg[0], "pwd", 3) == 0)
-		return (1);
-	else if (ft_strncmp(g_reach->data->arg[0], "export", 6) == 0)
-		return (1);
-	else if (ft_strncmp(g_reach->data->arg[0], "env", 3) == 0)
-		return (1);
-	else if (ft_strncmp(g_reach->data->arg[0], "unset", 5) == 0)
-		return (1);
-	else if (ft_strncmp(g_reach->data->arg[0], "echo", 4) == 0)
-		return (1);
-	else if (ft_strncmp(g_reach->data->arg[0], "cd", 2) == 0)
-		return (1);
-	return (0);
+	(void)sig;
+	printf("\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
-void	ft_commands(void)
+void	control_D(void)
 {
-	if (ft_strncmp(g_reach->data->arg[0], "pwd", 3) == 0)
-		ft_putendl_fd(getcwd(g_reach->data->cwd, sizeof(char *)), 1);
-	else if (ft_strncmp(g_reach->data->arg[0], "echo", 4) == 0)
-		ft_echo(g_reach->data->arg);
-	else if (ft_strncmp(g_reach->data->arg[0], "cd", 2) == 0)
-		ft_cd(g_reach->data->arg);
-	else if (ft_strncmp(g_reach->data->arg[0], "export", 6) == 0)
-		g_reach->data->export = ft_export(g_reach->data->export, g_reach->data->arg);
-	else if (ft_strncmp(g_reach->data->arg[0], "env", 3) == 0)
-		ft_env(g_reach->data->env_in);
-	else if (ft_strncmp(g_reach->data->arg[0], "unset", 5) == 0)
-		ft_unset(g_reach->data->export, g_reach->data->arg);//düzenle.
-	else if (access(ft_strjoin("/bin/", g_reach->data->arg[0]), X_OK) != -1)
-		execve(ft_strjoin("/bin/", g_reach->data->arg[0]), g_reach->data->arg, g_reach->data->env_in);
-	else if (ft_strncmp(g_reach->data->arg[0], "exit", 4) != 0)
-		printf("command not found: %s\n", g_reach->data->arg[0]);
+	printf("exit\n");
+	exit(1);
 }
 
 int	main(int ac, char **av, char **env)
 {
-  g_reach = malloc(sizeof(t_data));
-  g_reach->data = malloc(sizeof(t_data));
-  ft_copy_env(env);
-  while (1)
-  {
-    g_reach->data->temp = readline("$Bismillah\033[0;32mterm\033[0m > ");
-    add_history(g_reach->data->temp);
-    //ft_parser(ac, av);//Tarık
-    //ft_routine(ac, av, env);//Zehra
-  }
-  //sysyem("leaks minishell");
-  return (0);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, ft_signalhandler);
+	g_reach = malloc(sizeof(t_data));
+	g_reach->data = malloc(sizeof(t_data));
+	ft_copy_env(env);
+	ft_copy_export(env);
+	while (1)
+	{
+		g_reach->data->temp = readline("$Bismillah\033[0;32mterm\033[0m > ");
+		if (!g_reach->data->temp)
+			control_D();
+		g_reach->data->arg = ft_split(ft_process(g_reach->data->temp), ' ');
+		add_history(g_reach->data->temp);
+		//ft_parser(ac, av);//Tarık-> parçalama argümanları doğru yerlere koyma(struct yapısında.)->PARSER.
+		//ft_routine(ac, av, env);//Zehra-> Forklama,redirection, gelen değerleri struct yapısından alma builtin, execve ve acces fonksiyonlarına yonlendirme.
+	}
+	//sysyem("leaks minishell");
+	return (0);
 }

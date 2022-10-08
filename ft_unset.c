@@ -14,7 +14,7 @@ int ft_check_arg(char **env, char *arg)
     while (env[++k])
     {
         if (ft_strncmp(env[k], arg, j) == 0)
-            return (k);//hiçbir zaman ilk env aradığımız arg olamaz!O yüzden patlamaz bu xd(oluyomus aq)
+            return (k);
     }
     return (0);
 }
