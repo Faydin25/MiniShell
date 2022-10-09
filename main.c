@@ -5,6 +5,7 @@
 void	ft_signalhandler(int sig)
 {
 	(void)sig;
+	g_reach->data->quesmark = "1";
 	printf("\n");
 	rl_replace_line("", 0);
 	rl_on_new_line();
