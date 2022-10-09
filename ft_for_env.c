@@ -61,4 +61,5 @@ void    ft_for_env(char *ex)
             }
          i++;
      }
+     g_reach->data->quesmark = "0";
 }

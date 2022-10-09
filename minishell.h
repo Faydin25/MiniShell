@@ -23,6 +23,7 @@ typedef struct s_data
 	char		**env_in;
 	char		**export;
 	char		*cwd;
+	char		*quesmark;
 }			t_data;
 
 typedef struct s_parser

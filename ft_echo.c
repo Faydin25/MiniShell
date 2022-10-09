@@ -20,18 +20,15 @@ void    ft_echo(char **arg)
 
     if (!arg)
     {
+        g_reach->data->quesmark = "0";
         printf("\n");
         return ;
     }
     tmp = ft_check_echo(arg[1], 'n');
     i = (tmp == 0) + 1;
     while (arg[i])
-    {
-        if (arg[i + 1])
-            printf("%s ", arg[i++]);
-        else
-            printf("%s", arg[i++]);
-    }
+        printf("%s ", arg[i++]);
     if (tmp)
         printf("\n");
+    g_reach->data->quesmark = "0";
 }

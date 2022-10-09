@@ -77,4 +77,5 @@ void    ft_unset(char **env, char **arg)
             g_reach->data->env_in = ft_delete_env(env, i);
         }
     }
+    g_reach->data->quesmark = "0";
 }

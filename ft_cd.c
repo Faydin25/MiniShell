@@ -4,6 +4,7 @@ void	ft_cd_second(char *arg)
 {
 		if (chdir(arg) != 0)
 			perror(arg);
+		g_reach->data->quesmark = "0";
 }
 
 void	ft_cd(char **arg)
@@ -36,6 +37,7 @@ void	ft_cd(char **arg)
 		if (chdir(ft_strchr(s, '=') + 1))
 			perror(arg[0]);
 		free(s);
+		g_reach->data->quesmark = "0";
 	}
 	else if (arg[1] && arg[1][0] == '~' && arg[1][1] == '/')
 		ft_cd_second(ft_strjoin(ft_strchr(s, '=') + 1, arg[1] + 1));
@@ -43,5 +45,6 @@ void	ft_cd(char **arg)
 	{
 		if (chdir(arg[1]))
 				perror(arg[1]);
+		g_reach->data->quesmark = "0";
 	}
 }
