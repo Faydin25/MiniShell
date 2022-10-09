@@ -1,6 +1,30 @@
 #include "minishell.h"
 #include <readline/readline.h>
 #include "../../readline/include/readline/readline.h"
+/*
+void	ft_dollar(char *s, int marked)
+{
+	int	i;
+
+	i = 0;
+	while (i < marked)
+	{
+
+	}
+}
+
+void	ft_check_dollar(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '$')
+			ft_dollar(s, i);
+		i++;
+	}
+}
 
 void	ft_signalhandler(int sig)
 {
@@ -10,7 +34,7 @@ void	ft_signalhandler(int sig)
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
-}
+}*/
 
 void	control_D(void)
 {
