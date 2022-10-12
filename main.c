@@ -34,12 +34,10 @@ int	main(int ac, char **av, char **env)
 		g_reach->data->temp = readline("$Bismillah\033[0;32mterm\033[0m > ");
 		if (!g_reach->data->temp)
 			control_D();
-			//printf("BURDA\n");
 		ft_process(g_reach->data->temp);
 		ft_check_dollar(g_reach->data->temp);
-		//printf("yoo burda\n");
 		add_history(g_reach->data->temp);
-		//ft_parser(ac, av);//Tarık-> parçalama argümanları doğru yerlere koyma(struct yapısında.)->PARSER.
+		//ft_parser(ac, g_reach->data->new_temp);//Tarık-> parçalama argümanları doğru yerlere koyma(struct yapısında.)->PARSER.
 		//ft_routine(ac, av, env);//Zehra-> Forklama,redirection, gelen değerleri struct yapısından alma builtin, execve ve acces fonksiyonlarına yonlendirme.
 	}
 	exit(0);

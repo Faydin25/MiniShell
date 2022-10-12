@@ -1,26 +1,31 @@
 #include "minishell.h"
 
-int ft_check_nail(char *s, int marked)//return(1) -> PATH veya $? çalışıcak demektir return(0)->string olarak algılayacak demektir.
+int ft_check_nail(char *s)//return(1) -> PATH veya $? çalışıcak demektir return(0)->string olarak algılayacak demektir.
 {
     int i;
-    int j;
+    int mod;
 
-    i = marked;
-    j = marked;
-    while (i >= 0 && s[i] != 39 && s[i] != 34)
-        i--;
-    while (s[j] && s[j] != 39 && s[j] != 34)
-        j++;
-    if (s[i] == s[j])
+    i = 0;
+    mod = 0;//mod=0->tırnak yok //mod=1->tek tırnak //mod=2 çift tırnak.
+    while (s[i] && s[i] != '$')
     {
-        if (s[i] == 34)
-            return (1);
-        else if (s[i] == 39)
-            return (0);
+        if (s[i] == 34 && (mod == 0 || mod == 2))
+        {
+            if (mod == 0)
+                mod = 2;
+            else
+                mod = 0;
+        }
+        else if (s[i] == 39 && (mod == 0 || mod == 1))
+        {
+            if (mod == 0)
+                mod = 1;
+            else
+                mod = 0;
+        }
+        i++;
     }
-    else if (s[j] == '\0')
-        return (1);
-    return (0);
+    return (mod);
 }
 
 void    ft_until_dollar(char *s, int marked)//$ görene kadar yazdık.
@@ -36,7 +41,7 @@ void    ft_until_dollar(char *s, int marked)//$ görene kadar yazdık.
     g_reach->data->new_temp[i] = '\0';
 }
 
-void    ft_quesmark(void)//$? yazdırma.
+void    ft_quesmark(void)//$? yazdırma.!!!!!!!!!!!!!!!!!!
 {
     int i;
     int j;
@@ -66,6 +71,7 @@ void    ft_combine(char *s)//$... yazdırma.
     while (s[j])
         g_reach->data->new_temp[i++] = s[j++];
     g_reach->data->new_temp[i] = '\0';
+    
 }
 
 void    ft_dollar(char *s, int marked)//PATH yolunu yazma, $? yazma.
@@ -76,8 +82,8 @@ void    ft_dollar(char *s, int marked)//PATH yolunu yazma, $? yazma.
 
     i = marked + 1;
     j = 0;
-    p = malloc(200000);
-    if (ft_check_nail(s, marked))
+    p = malloc(20000);
+    if (ft_check_nail(s) != 1)
     {
         if (s[i] == '?')//$? için
         {
@@ -89,9 +95,13 @@ void    ft_dollar(char *s, int marked)//PATH yolunu yazma, $? yazma.
         {
             p[j++] = s[i++];
         }
+        p[j] = '\0';
         i = -1;
-        while (ft_strncmp(g_reach->data->env_in[++i], p, j) == 0)
-            ft_combine(g_reach->data->env_in[i]);
+        while (g_reach->data->env_in[++i])
+        {
+            if (ft_strncmp(g_reach->data->env_in[i], p, j) == 0)
+                ft_combine(g_reach->data->env_in[i]);
+        }
     }
     free(p);
 }
@@ -103,21 +113,22 @@ void	ft_check_dollar(char *s)//dolar var mı? varsa fonklara yonlendir.
 
 	i = 0;
     j = 0;
-    g_reach->data->new_temp = malloc(200000);
+    g_reach->data->new_temp = malloc(2000);
+    g_reach->data->new_temp[0] = '\0';
 	while (s[i])
 	{
 		if (s[i] == '$')
         {
-            ft_until_dollar(s, i);
             ft_dollar(s, i);
+            while (s[i] && s[i] != 34 && s[i] != 39 && s[i] != ' ')
+                i++;
         }
         else
         {
             while (g_reach->data->new_temp[j])
                 j++;
-            g_reach->data->new_temp[j] = s[i];
+            g_reach->data->new_temp[j++] = s[i++];
+            g_reach->data->new_temp[j] = '\0';
         }
-        i++;
 	}
-    printf("%s\n", g_reach->data->new_temp);
 }

@@ -7,7 +7,7 @@ int    ft_check(char *arg)
     i = 0;
     while (arg[i] && (arg[i] == ' ' || arg[i] == '\t'))
         i++;
-    return (i);
+    return (i - 1);
 }
 
 char    *ft_process(char *arg)
@@ -17,8 +17,8 @@ char    *ft_process(char *arg)
     int     i;
 
     i = 0;
-    s = (char *)malloc(sizeof(ft_strlen(arg) + 1));
-    j = ft_check(arg);
+    s = (char *)malloc(sizeof(char) * (ft_strlen(arg) + 1));
+    j = ft_check(arg) + 1;
     while (arg[j])
     {
         while (arg[j] && (arg[j] == ' ' || arg[j] == '\t') && arg[j + 1] && \
@@ -28,5 +28,6 @@ char    *ft_process(char *arg)
             arg[j] = ' ';
         s[i++] = arg[j++];
     }
+    s[i] = '\0';
     return (s);
 }
