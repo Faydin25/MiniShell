@@ -21,7 +21,7 @@ RL_LIBRARY_VERSION = 8.2
 SHELL = /bin/sh
 RM = rm -f
 
-prefix = /Users/faydin/Desktop/Minishelll/lib/readline
+prefix = /Users/faydin/Desktop/Min/lib/readline
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
@@ -32,7 +32,7 @@ datadir = ${datarootdir}
 
 top_srcdir = ..
 #BUILD_DIR = .
-BUILD_DIR = /Users/faydin/Desktop/Minishelll/lib/readline
+BUILD_DIR = /Users/faydin/Desktop/Min/lib/readline
 installdir = $(datadir)/readline
 
 INSTALL = /usr/bin/install -c

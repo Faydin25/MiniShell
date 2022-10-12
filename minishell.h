@@ -19,6 +19,7 @@
 typedef struct s_data
 {
 	char		*temp;
+	char		*new_temp;
 	char		**arg;
 	char		**env_in;
 	char		**export;
@@ -65,4 +66,5 @@ void ft_malloc_for_export(char **env);
 void    ft_copy_export(char **env);
 void    ft_new_env(char *export);
 void    ft_for_env(char *ex);
+void	ft_check_dollar(char *s);
 #endif

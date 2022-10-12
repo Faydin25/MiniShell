@@ -1,30 +1,6 @@
 #include "minishell.h"
 #include <readline/readline.h>
 #include "../../readline/include/readline/readline.h"
-/*
-void	ft_dollar(char *s, int marked)
-{
-	int	i;
-
-	i = 0;
-	while (i < marked)
-	{
-
-	}
-}
-
-void	ft_check_dollar(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '$')
-			ft_dollar(s, i);
-		i++;
-	}
-}
 
 void	ft_signalhandler(int sig)
 {
@@ -34,7 +10,7 @@ void	ft_signalhandler(int sig)
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
-}*/
+}
 
 void	control_D(void)
 {
@@ -58,12 +34,13 @@ int	main(int ac, char **av, char **env)
 		g_reach->data->temp = readline("$Bismillah\033[0;32mterm\033[0m > ");
 		if (!g_reach->data->temp)
 			control_D();
+		ft_process(g_reach->data->temp);
 		//ft_check_dollar(g_reach->data->temp);
-		g_reach->data->arg = ft_split(ft_process(g_reach->data->temp), ' ');
 		add_history(g_reach->data->temp);
 		//ft_parser(ac, av);//Tarık-> parçalama argümanları doğru yerlere koyma(struct yapısında.)->PARSER.
 		//ft_routine(ac, av, env);//Zehra-> Forklama,redirection, gelen değerleri struct yapısından alma builtin, execve ve acces fonksiyonlarına yonlendirme.
 	}
+	exit(0);
 	//sysyem("leaks minishell");
 	return (0);
 }
