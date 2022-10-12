@@ -16,8 +16,8 @@ void ft_malloc_for_env(char **env)
         i = 0;
         while (env[j][i])
             i++;
-        g_reach->data->env_in[j] = (char *)malloc(sizeof(char) * (i));
-        g_reach->data->env_in[j][i] = '\0';
+        g_reach->data->env_in[j] = (char *)malloc(sizeof(char) * (i + 1));
+        g_reach->data->env_in[j][i] = 0;
         i = 0;
         j++;
     }

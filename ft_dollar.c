@@ -7,9 +7,9 @@ int ft_check_nail(char *s, int marked)//return(1) -> PATH veya $? çalışıcak 
 
     i = marked;
     j = marked;
-    while (i >= 0 && (s[i] != 39 || s[i] != 34))
+    while (i >= 0 && s[i] != 39 && s[i] != 34)
         i--;
-    while (s[j] && (s[j] != 39 || s[j] != 34))
+    while (s[j] && s[j] != 39 && s[j] != 34)
         j++;
     if (s[i] == s[j])
     {
@@ -33,6 +33,7 @@ void    ft_until_dollar(char *s, int marked)//$ görene kadar yazdık.
        g_reach->data->new_temp[i] = s[i];
         i++;
     }
+    g_reach->data->new_temp[i] = '\0';
 }
 
 void    ft_quesmark(void)//$? yazdırma.
@@ -45,12 +46,26 @@ void    ft_quesmark(void)//$? yazdırma.
     while (g_reach->data->new_temp[i])
         i++;
     while(g_reach->data->quesmark[j])
-        g_reach->data->new_temp[i++] == g_reach->data->quesmark[j++];
+        g_reach->data->new_temp[i++] = g_reach->data->quesmark[j++];
+    g_reach->data->new_temp[i] = '\0';
 }
 
-void    ft_combine(char *s)
+void    ft_combine(char *s)//$... yazdırma.
 {
-    ;
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (g_reach->data->new_temp[i])
+        i++;
+    while (s[j] && s[j] != '=')
+        j++;
+    if (s[j])
+        j++;
+    while (s[j])
+        g_reach->data->new_temp[i++] = s[j++];
+    g_reach->data->new_temp[i] = '\0';
 }
 
 void    ft_dollar(char *s, int marked)//PATH yolunu yazma, $? yazma.
@@ -59,7 +74,7 @@ void    ft_dollar(char *s, int marked)//PATH yolunu yazma, $? yazma.
     int     j;
     char    *p;
 
-    i = marked + 1; 
+    i = marked + 1;
     j = 0;
     p = malloc(200000);
     if (ft_check_nail(s, marked))
@@ -84,8 +99,11 @@ void    ft_dollar(char *s, int marked)//PATH yolunu yazma, $? yazma.
 void	ft_check_dollar(char *s)//dolar var mı? varsa fonklara yonlendir.
 {
 	int	i;
+    int j;
 
-	i = -1;
+	i = 0;
+    j = 0;
+    g_reach->data->new_temp = malloc(200000);
 	while (s[i])
 	{
 		if (s[i] == '$')
@@ -93,6 +111,13 @@ void	ft_check_dollar(char *s)//dolar var mı? varsa fonklara yonlendir.
             ft_until_dollar(s, i);
             ft_dollar(s, i);
         }
+        else
+        {
+            while (g_reach->data->new_temp[j])
+                j++;
+            g_reach->data->new_temp[j] = s[i];
+        }
         i++;
 	}
+    printf("%s\n", g_reach->data->new_temp);
 }
