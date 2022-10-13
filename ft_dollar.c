@@ -98,7 +98,6 @@ void    ft_write_to_new_temp(char *s, int marked)//!!!!!!!!!!
         g_reach->data->new_temp[j] = '\0';
     }
     g_reach->data->new_temp[j] = '\0';
-    //printf("->%s\n", g_reach->data->new_temp);
 }
 
 void    ft_dollar(char *s, int marked)//PATH yolunu yazma, $? yazma.
@@ -146,7 +145,6 @@ void	ft_check_dollar(char *s)//dolar var mı? varsa fonklara yonlendir.
     g_reach->data->new_temp[0] = '\0';
 	while (s[i])
 	{
-        //printf("%c\n", s[i]);
 		if (s[i] == '$')
         {
             ft_dollar(s, i);
