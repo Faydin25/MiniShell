@@ -1,11 +1,11 @@
 #include "minishell.h"
 
-int ft_check_nail(char *s)//return(1) -> PATH veya $? çalışıcak demektir return(0)->string olarak algılayacak demektir.
+int ft_check_nail(char *s, int marked)//return(1) -> PATH veya $? çalışıcak demektir return(0)->string olarak algılayacak demektir.
 {
     int i;
     int mod;
 
-    i = 0;
+    i = marked - 1;
     mod = 0;//mod=0->tırnak yok //mod=1->tek tırnak //mod=2 çift tırnak.
     while (s[i] && s[i] != '$')
     {
@@ -77,7 +77,7 @@ void    ft_combine(char *s)//$... yazdırma.
     
 }
 
-void    ft_write_to_new_temp(char *s, int marked)//!!!!!!!!!!
+void    ft_write_to_new_temp(char *s, int marked)
 {
     int i;
     int j;
@@ -109,7 +109,7 @@ void    ft_dollar(char *s, int marked)//PATH yolunu yazma, $? yazma.
     i = marked + 1;
     j = 0;
     p = malloc(20000);
-    if (ft_check_nail(s) != 1)
+    if (ft_check_nail(s, marked) != 1)
     {
         if (s[i] == '?')//$? için
         {
