@@ -41,7 +41,7 @@ void    ft_until_dollar(char *s, int marked)//$ görene kadar yazdık.
     g_reach->data->new_temp[i] = '\0';
 }
 
-void    ft_quesmark(void)//$? yazdırma.!!!!!!!!!!!!!!!!!!
+void    ft_quesmark(char *s, int marked)//$? yazdırma.
 {
     int i;
     int j;
@@ -52,6 +52,9 @@ void    ft_quesmark(void)//$? yazdırma.!!!!!!!!!!!!!!!!!!
         i++;
     while(g_reach->data->quesmark[j])
         g_reach->data->new_temp[i++] = g_reach->data->quesmark[j++];
+    j = marked + 1;
+    while (s[j] && s[j] != 34 && s[j] != 39 && s[j] != ' ' && s[j] != '$')
+        g_reach->data->new_temp[i++] = s[j++];
     g_reach->data->new_temp[i] = '\0';
 }
 
@@ -74,6 +77,30 @@ void    ft_combine(char *s)//$... yazdırma.
     
 }
 
+void    ft_write_to_new_temp(char *s, int marked)//!!!!!!!!!!
+{
+    int i;
+    int j;
+
+    i = marked;
+    j = 0;
+    while (g_reach->data->new_temp[j])
+        j++;
+    g_reach->data->new_temp[j] = s[marked - 1];
+    g_reach->data->new_temp[++j] = '\0';
+    (void)s;
+    while (s[i] && s[i] != ' ' && s[i] != '$' && s[i] != 34 && s[i] != 39)
+    {
+        j = 0;
+        while (g_reach->data->new_temp[j])
+            j++;
+        g_reach->data->new_temp[j++] = s[i++];
+        g_reach->data->new_temp[j] = '\0';
+    }
+    g_reach->data->new_temp[j] = '\0';
+    //printf("->%s\n", g_reach->data->new_temp);
+}
+
 void    ft_dollar(char *s, int marked)//PATH yolunu yazma, $? yazma.
 {
     int     i;
@@ -87,11 +114,11 @@ void    ft_dollar(char *s, int marked)//PATH yolunu yazma, $? yazma.
     {
         if (s[i] == '?')//$? için
         {
-            ft_quesmark();
+            ft_quesmark(s, i);
             free(p);
             return ;
         }
-        while (s[i] && s[i] != 34 && s[i] != ' ')
+        while (s[i] && s[i] != 34 && s[i] != ' ' && s[i] != '$')
         {
             p[j++] = s[i++];
         }
@@ -103,6 +130,8 @@ void    ft_dollar(char *s, int marked)//PATH yolunu yazma, $? yazma.
                 ft_combine(g_reach->data->env_in[i]);
         }
     }
+    else
+        ft_write_to_new_temp(s, i);
     free(p);
 }
 
@@ -113,14 +142,16 @@ void	ft_check_dollar(char *s)//dolar var mı? varsa fonklara yonlendir.
 
 	i = 0;
     j = 0;
-    g_reach->data->new_temp = malloc(2000);
+    g_reach->data->new_temp = malloc(20000);
     g_reach->data->new_temp[0] = '\0';
 	while (s[i])
 	{
+        //printf("%c\n", s[i]);
 		if (s[i] == '$')
         {
             ft_dollar(s, i);
-            while (s[i] && s[i] != 34 && s[i] != 39 && s[i] != ' ')
+                i++;
+            while (s[i] && s[i] != 34 && s[i] != 39 && s[i] != ' ' && s[i] != '$')
                 i++;
         }
         else
@@ -131,4 +162,5 @@ void	ft_check_dollar(char *s)//dolar var mı? varsa fonklara yonlendir.
             g_reach->data->new_temp[j] = '\0';
         }
 	}
+    printf("%s\n", g_reach->data->new_temp);
 }

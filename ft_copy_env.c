@@ -41,6 +41,10 @@ void    ft_copy_env(char **env)
         j++;
         i = 0;
     }
+    g_reach->data->quesmark = malloc(10);
+    g_reach->data->quesmark[i] = '0';
+    while (++i < 10)
+        g_reach->data->quesmark[i] = '\0';
 }
 
 void ft_malloc_for_export(char **env)
