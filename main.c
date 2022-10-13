@@ -34,7 +34,7 @@ int	main(int ac, char **av, char **env)
 		g_reach->data->temp = readline("$Bismillah\033[0;32mterm\033[0m > ");
 		if (!g_reach->data->temp)
 			control_D();
-		ft_process(g_reach->data->temp);
+		g_reach->data->temp = ft_process(g_reach->data->temp);
 		ft_check_dollar(g_reach->data->temp);
 		add_history(g_reach->data->temp);
 		//ft_parser(ac, g_reach->data->new_temp);//Tarık-> parçalama argümanları doğru yerlere koyma(struct yapısında.)->PARSER.
