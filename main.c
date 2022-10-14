@@ -14,7 +14,7 @@ void	ft_signalhandler(int sig)
 
 void	control_D(void)
 {
-	//ft_clear();
+	ft_clear();
 	printf("exit\n");
 	exit(1);
 }
@@ -40,7 +40,6 @@ int	main(int ac, char **av, char **env)
 		//ft_parser(ac, g_reach->data->new_temp);//Tarık-> parçalama argümanları doğru yerlere koyma(struct yapısında.)->PARSER.
 		//ft_routine(ac, av, env);//Zehra-> Forklama,redirection, gelen değerleri struct yapısından alma builtin, execve ve acces fonksiyonlarına yonlendirme.
 	}
-	exit(0);
 	//sysyem("leaks minishell");
 	return (0);
 }

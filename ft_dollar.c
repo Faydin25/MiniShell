@@ -115,7 +115,6 @@ void    ft_dollar(char *s, int marked)//PATH yolunu yazma, $? yazma.
     p = malloc(20000);
     if (ft_check_nail(s, marked) != 1)
     {
-        printf("%c\n", s[i]);
         if (s[i] == '?')//$? için
         {
             ft_quesmark(s, i);

@@ -19,12 +19,12 @@
 typedef struct s_data
 {
 	char		*temp;
+	char		*cwd;
+	char		*quesmark;
 	char		*new_temp;
 	char		**arg;
 	char		**env_in;
 	char		**export;
-	char		*cwd;
-	char		*quesmark;
 }			t_data;
 
 typedef struct s_parser
@@ -46,7 +46,9 @@ typedef struct s_code
 
 typedef	struct s_reach
 {
-	t_data *data;
+	t_code		*code;
+	t_data		*data;
+	parse_data	*parse_data;
 }	t_reach;
 
 t_reach	*g_reach;
@@ -67,4 +69,6 @@ void    ft_copy_export(char **env);
 void    ft_new_env(char *export);
 void    ft_for_env(char *ex);
 void	ft_check_dollar(char *s);
+void    ft_clear(void);
+
 #endif

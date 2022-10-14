@@ -31,7 +31,7 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /Users/faydin/Desktop/Min/lib/readline
+BUILD_DIR = /Users/faydin/Desktop/megaq/lib/readline
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -48,7 +48,7 @@ MV = mv
 
 SHELL = /bin/sh
 
-prefix = /Users/faydin/Desktop/Min/lib/readline
+prefix = /Users/faydin/Desktop/megaq/lib/lib/readline
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
