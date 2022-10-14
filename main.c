@@ -1,6 +1,4 @@
 #include "minishell.h"
-#include <readline/readline.h>
-#include "../../readline/include/readline/readline.h"
 
 void	ft_signalhandler(int sig)
 {
