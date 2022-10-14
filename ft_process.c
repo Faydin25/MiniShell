@@ -10,6 +10,22 @@ int    ft_check(char *arg)
     return (i - 1);
 }
 
+char    *ft_space(char *s)
+{
+    int i;
+
+    i = 0;
+    while (s[i])
+        i++;
+    --i;
+    while (i > 0 && s[i] == ' ')
+    {
+        s[i] = '\0';
+        i--;
+    }
+    return (s);
+}
+
 char    *ft_process(char *arg)
 {
     char    *s;
@@ -29,5 +45,6 @@ char    *ft_process(char *arg)
         s[i++] = arg[j++];
     }
     s[i] = '\0';
+    s = ft_space(s);
     return (s);
 }

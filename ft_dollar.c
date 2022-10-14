@@ -106,11 +106,16 @@ void    ft_dollar(char *s, int marked)//PATH yolunu yazma, $? yazma.
     int     j;
     char    *p;
 
-    i = marked + 1;
+    if (s[marked + 1])
+        i = marked + 1;
+    else 
+        return ;
+
     j = 0;
     p = malloc(20000);
     if (ft_check_nail(s, marked) != 1)
     {
+        printf("%c\n", s[i]);
         if (s[i] == '?')//$? için
         {
             ft_quesmark(s, i);
@@ -145,7 +150,7 @@ void	ft_check_dollar(char *s)//dolar var mı? varsa fonklara yonlendir.
     g_reach->data->new_temp[0] = '\0';
 	while (s[i])
 	{
-		if (s[i] == '$')
+		if (s[i] == '$' && s[i + 1] != '\0')
         {
             ft_dollar(s, i);
                 i++;
