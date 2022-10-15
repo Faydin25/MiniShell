@@ -1,8 +1,7 @@
 #include "minishell.h"
 
-void    ft_exit(char *arg)
+void    ft_exit(char *arg)//bastan yaz.
 {
-    ft_clear();
     printf("exit\n");
     exit(0);
 }
