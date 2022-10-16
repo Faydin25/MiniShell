@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int ft_check_arg(char **env, char *arg)
+int ft_check_args(char **env, char *arg)
 {
     int i;
     int k;
@@ -71,11 +71,10 @@ void    ft_unset(char **env, char **arg)
     k = 0;
     while (arg[++k])
     {
-        if (ft_check_arg(env, arg[k]))
+        if (ft_check_args(env, arg[k]))
         {
-            i = ft_check_arg(env, arg[k]);
-            g_reach->data->env_in = ft_delete_env(env, i);
+            i = ft_check_args(env, arg[k]);
+            g_reach->data->export = ft_delete_env(env, i);
         }
     }
-    g_reach->data->quesmark = "0";
 }

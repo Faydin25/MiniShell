@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static int  ft_check_echo(char *s, char c)
+static int  ft_check_echo(char *s, char c)//eklenecek birşey var mı tariga sor.
 {
     int i;
 

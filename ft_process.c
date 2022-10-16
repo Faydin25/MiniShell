@@ -46,5 +46,6 @@ char    *ft_process(char *arg)
     }
     s[i] = '\0';
     s = ft_space(s);
+	free(arg);
     return (s);
 }

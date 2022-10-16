@@ -23,7 +23,6 @@ typedef struct s_data
 	char		*quesmark;
 	char		*new_temp;
 	char		**arg;
-	char		**env_in;
 	char		**export;
 }			t_data;
 
@@ -59,7 +58,7 @@ void	ft_cd(char **arg);
 void	ft_routine(void);
 void    ft_env(char **env_in);
 void	ft_just_export(char **env);
-char	**ft_export(char **env, char **arg);
+void	ft_export(char **env, char **arg);
 char    *ft_process(char *arg);
 void	ft_copy_env(char **env);
 void	ft_malloc_for_env(char **env);

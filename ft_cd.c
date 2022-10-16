@@ -7,7 +7,7 @@ void	ft_cd_second(char *arg)
 		g_reach->data->quesmark = "0";
 }
 
-void	ft_cd(char **arg)
+void	ft_cd(char **arg)//bunuda baştan yazcan aq...
 {
 	char	*s;
 	int		i;
@@ -23,11 +23,11 @@ void	ft_cd(char **arg)
 	}
 	if (!arg[1] || ft_strchr(arg[1], '~'))
 	{
-		while (g_reach->data->env_in[++i])
+		while (g_reach->data->export[++i])
 		{
-			if (ft_strncmp(g_reach->data->env_in[i], "HOME", 4) == 0)
+			if (ft_strncmp(g_reach->data->export[i], "HOME", 4) == 0)
 			{
-				s = ft_strdup(g_reach->data->env_in[i]);
+				s = ft_strdup(g_reach->data->export[i]);
 				break;
 			}
 		}

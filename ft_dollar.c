@@ -16,6 +16,8 @@ int ft_check_nail(char *s, int marked)//return(1) -> PATH veya $? çalışıcak 
             else
                 mod = 0;
         }
+        else if (mod == 1 && s[i] == 34)
+            mod = 1;
         else if (s[i] == 39 && (mod == 0 || mod == 1))
         {
             if (mod == 0)
@@ -127,10 +129,10 @@ void    ft_dollar(char *s, int marked)//PATH yolunu yazma, $? yazma.
         }
         p[j] = '\0';
         i = -1;
-        while (g_reach->data->env_in[++i])
+        while (g_reach->data->export[++i])
         {
-            if (ft_strncmp(g_reach->data->env_in[i], p, j) == 0)
-                ft_combine(g_reach->data->env_in[i]);
+            if (ft_strncmp(g_reach->data->export[i], p, j) == 0)
+                ft_combine(g_reach->data->export[i]);
         }
     }
     else
@@ -145,7 +147,10 @@ void	ft_check_dollar(char *s)//dolar var mı? varsa fonklara yonlendir.
 
 	i = 0;
     j = 0;
-    g_reach->data->new_temp = malloc(20000);
+    g_reach->data->quesmark = "0";
+	if (g_reach->data->new_temp)
+		free(g_reach->data->new_temp);
+	g_reach->data->new_temp = malloc(20000);
     g_reach->data->new_temp[0] = '\0';
 	while (s[i])
 	{
