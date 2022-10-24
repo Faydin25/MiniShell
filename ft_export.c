@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void    ft_just_export(char **env)
+void    ft_just_export(char **env)//
 {
     int i;
 

@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	ft_signalhandler(int sig)
+void	ft_signalhandler(int sig)//
 {
 	(void)sig;
 	g_reach->data->quesmark = "1";

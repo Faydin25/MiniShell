@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void ft_malloc_for_export(char **env)
+void ft_malloc_for_export(char **env)//
 {
     int i;
     int j;

@@ -1,13 +1,13 @@
 #include "minishell.h"
 
-void	ft_cd_second(char *arg)
+void	ft_cd_second(char *arg)//
 {
 		if (chdir(arg) != 0)
 			perror(arg);
 		g_reach->data->quesmark = "0";
 }
 
-void	ft_cd(char **arg)//bunuda baştan yazcan aq...
+void	ft_cd(char **arg)
 {
 	char	*s;
 	int		i;

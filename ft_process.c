@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int    ft_check(char *arg)
+int    ft_check(char *arg)//
 {
     int i;
 

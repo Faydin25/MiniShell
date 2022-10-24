@@ -6,7 +6,7 @@ int ft_check_nail(char *s, int marked)//return(1) -> PATH veya $? çalışıcak 
     int mod;
 
     i = marked - 1;
-    mod = 0;//mod=0->tırnak yok //mod=1->tek tırnak //mod=2 çift tırnak.
+    mod = 0;
     while (s[i] && s[i] != '$')
     {
         if (s[i] == 34 && (mod == 0 || mod == 2))
@@ -30,7 +30,7 @@ int ft_check_nail(char *s, int marked)//return(1) -> PATH veya $? çalışıcak 
     return (mod);
 }
 
-void    ft_until_dollar(char *s, int marked)//$ görene kadar yazdık.
+void    ft_until_dollar(char *s, int marked)
 {
     int     i;
 
@@ -43,7 +43,7 @@ void    ft_until_dollar(char *s, int marked)//$ görene kadar yazdık.
     g_reach->data->new_temp[i] = '\0';
 }
 
-void    ft_quesmark(char *s, int marked)//$? yazdırma.
+void    ft_quesmark(char *s, int marked)
 {
     int i;
     int j;
@@ -60,7 +60,7 @@ void    ft_quesmark(char *s, int marked)//$? yazdırma.
     g_reach->data->new_temp[i] = '\0';
 }
 
-void    ft_combine(char *s)//$... yazdırma.
+void    ft_combine(char *s)
 {
     int i;
     int j;
@@ -102,7 +102,7 @@ void    ft_write_to_new_temp(char *s, int marked)
     g_reach->data->new_temp[j] = '\0';
 }
 
-void    ft_dollar(char *s, int marked)//PATH yolunu yazma, $? yazma.
+void    ft_dollar(char *s, int marked)
 {
     int     i;
     int     j;
@@ -140,7 +140,7 @@ void    ft_dollar(char *s, int marked)//PATH yolunu yazma, $? yazma.
     free(p);
 }
 
-void	ft_check_dollar(char *s)//dolar var mı? varsa fonklara yonlendir.
+void	ft_check_dollar(char *s)
 {
 	int	i;
     int j;
