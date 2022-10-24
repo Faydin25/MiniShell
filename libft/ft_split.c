@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	wordcounter(const char *s, char c)
+static int	wordcounter(const char *s, char c)//
 {
 	int	i;
 
