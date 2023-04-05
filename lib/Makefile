@@ -22,7 +22,7 @@ LIB				= ./.minishell
 
 all : $(LIB)
 
-fclean :
+fclean : 
 	@echo $(YELLOW) "Removing readline..." $(END)
 	@$(RM) ./readline $(LIB)
 	@echo $(RED) "readline deleted successfully!\n" $(END)
